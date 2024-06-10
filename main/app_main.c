@@ -24,5 +24,6 @@ void tyrianTask(void *pvParameters)
 //extern "C"
 void app_main(void)
 {
+    printf("OpenTyrian initialization...\n");
 	xTaskCreatePinnedToCore(&tyrianTask, "tyrianTask", 34000, NULL, 5, NULL, 0);
 }

@@ -50,7 +50,7 @@ static const GPIOKeyMap keymap[2][6]={{
 	{CONFIG_HW_BUTTON_PIN_NUM_BUTTON1, SDL_SCANCODE_SPACE, SDLK_SPACE},   	
 }};
 
-static xQueueHandle gpio_evt_queue = NULL;
+static QueueHandle_t gpio_evt_queue = NULL;
 
 typedef struct {
     Uint32 type;        /**< ::SDL_KEYDOWN or ::SDL_KEYUP */
@@ -106,7 +106,7 @@ int checkPinStruct(int i, uint8_t *lastState, SDL_Event *event)
 
 int readOdroidXY(SDL_Event * event)
 {
-    int joyX = adc1_get_raw(ODROID_GAMEPAD_IO_X);
+    /*int joyX = adc1_get_raw(ODROID_GAMEPAD_IO_X);
     int joyY = adc1_get_raw(ODROID_GAMEPAD_IO_Y);
     
     JoystickState state;
@@ -155,7 +155,7 @@ int readOdroidXY(SDL_Event * event)
     for(int i = 0; i < 6; i++)
         if(checkPinStruct(i, &lastState.buttons[i], event))
             return 1;
-
+*/
     return 0;
 }
 
@@ -166,14 +166,14 @@ int SDL_PollEvent(SDL_Event * event)
 
 #ifndef CONFIG_HW_ODROID_GO
     GPIOEvent ev;
-    if(xQueueReceive(gpio_evt_queue, &ev, 0)) {
-        event->key.keysym.sym = ev.keycode;
-        event->key.keysym.scancode = ev.scancode;
-        event->key.type = ev.type;
-        event->key.keysym.mod = 0;
-        event->key.state = ev.type == SDL_KEYDOWN ? SDL_PRESSED : SDL_RELEASED;     //< ::SDL_PRESSED or ::SDL_RELEASED 
-        return 1;
-    }
+    // if(xQueueReceive(gpio_evt_queue, &ev, 0)) {
+    //     event->key.keysym.sym = ev.keycode;
+    //     event->key.keysym.scancode = ev.scancode;
+    //     event->key.type = ev.type;
+    //     event->key.keysym.mod = 0;
+    //     event->key.state = ev.type == SDL_KEYDOWN ? SDL_PRESSED : SDL_RELEASED;     //< ::SDL_PRESSED or ::SDL_RELEASED 
+    //     return 1;
+    // }
 #else
     return readOdroidXY(event);
 #endif
@@ -207,40 +207,40 @@ void gpioTask(void *arg) {
 */
 void inputInit()
 {
-	gpio_config_t io_conf;
-    io_conf.pull_down_en = 0;
+	// gpio_config_t io_conf;
+    // io_conf.pull_down_en = 0;
 
-    //interrupt of rising edge
-    io_conf.intr_type = GPIO_INTR_ANYEDGE;
+    // //interrupt of rising edge
+    // io_conf.intr_type = GPIO_INTR_ANYEDGE;
 
-    //bit mask of the pins, use GPIO... here
-	for (int i=0; i < NELEMS(keymap[0]); i++)
-    	if(i==0)
-			io_conf.pin_bit_mask = (1ULL<<keymap[0][i].gpio);
-		else
-			io_conf.pin_bit_mask |= (1ULL<<keymap[0][i].gpio);
+    // //bit mask of the pins, use GPIO... here
+	// for (int i=0; i < NELEMS(keymap[0]); i++)
+    // 	if(i==0)
+	// 		io_conf.pin_bit_mask = (1ULL<<keymap[0][i].gpio);
+	// 	else
+	// 		io_conf.pin_bit_mask |= (1ULL<<keymap[0][i].gpio);
 
-	io_conf.mode = GPIO_MODE_INPUT;
-    io_conf.pull_up_en = 1;
-    gpio_config(&io_conf);
+	// io_conf.mode = GPIO_MODE_INPUT;
+    // io_conf.pull_up_en = 1;
+    // gpio_config(&io_conf);
     
-#ifndef CONFIG_HW_ODROID_GO
-    //create a queue to handle gpio event from isr
-    gpio_evt_queue = xQueueCreate(10, sizeof(GPIOEvent));
-    //start gpio task
-	//xTaskCreatePinnedToCore(&gpioTask, "GPIO", 1500, NULL, 7, NULL, 0);
+// #ifndef CONFIG_HW_ODROID_GO
+//     //create a queue to handle gpio event from isr
+//     gpio_evt_queue = xQueueCreate(10, sizeof(GPIOEvent));
+//     //start gpio task
+// 	//xTaskCreatePinnedToCore(&gpioTask, "GPIO", 1500, NULL, 7, NULL, 0);
 
-    //install gpio isr service
-    gpio_install_isr_service(ESP_INTR_FLAG_SHARED);
+//     //install gpio isr service
+//     gpio_install_isr_service(ESP_INTR_FLAG_SHARED);
 
-    //hook isr handler
-	for (int i=0; i < NELEMS(keymap[0]); i++)
-    	gpio_isr_handler_add(keymap[0][i].gpio, gpio_isr_handler, (void*) keymap[0][i].gpio);
-#else
-	adc1_config_width(ADC_WIDTH_12Bit);
-    adc1_config_channel_atten(ODROID_GAMEPAD_IO_X, ADC_ATTEN_11db);
-	adc1_config_channel_atten(ODROID_GAMEPAD_IO_Y, ADC_ATTEN_11db);
-#endif    
+//     //hook isr handler
+// 	for (int i=0; i < NELEMS(keymap[0]); i++)
+//     	gpio_isr_handler_add(keymap[0][i].gpio, gpio_isr_handler, (void*) keymap[0][i].gpio);
+// #else
+// 	adc1_config_width(ADC_WIDTH_12Bit);
+//     adc1_config_channel_atten(ODROID_GAMEPAD_IO_X, ADC_ATTEN_11db);
+// 	adc1_config_channel_atten(ODROID_GAMEPAD_IO_Y, ADC_ATTEN_11db);
+// #endif    
 
 	printf("keyboard: GPIO task created.\n");
     initInput = true;
