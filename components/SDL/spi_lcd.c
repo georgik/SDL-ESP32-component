@@ -112,9 +112,9 @@ static esp_lcd_touch_handle_t touch_handle = NULL;
 #define BSP_AXP2101_ADDR    0x34
 #define BSP_AW9523_ADDR     0x58
 
+/* M5 Stack display initialization
 static esp_err_t bsp_display_brightness_init(void)
 {
-    /* Initilize I2C */
     bsp_i2c_init();
 
     const uint8_t lcd_bl_en[] = { 0x90, 0xBF }; // AXP DLDO1 Enable
@@ -124,6 +124,7 @@ static esp_err_t bsp_display_brightness_init(void)
 
     return ESP_OK;
 }
+*/
 // esp_err_t bsp_display_brightness_set(int brightness_percent)
 // {
 //     if (brightness_percent > 100) {
