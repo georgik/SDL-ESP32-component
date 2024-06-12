@@ -22,22 +22,15 @@ int main( int argc, char *argv[] )
 		return -1;
 	}
 	init_video();
+    printf("Entering main app loop\n");
 
     for (; ; )
     {
          Uint32 red = SDL_MapRGB(VGAScreen->format, 255, 0, 0);
-
-    // Set 100 pixels to red
-    for (int i = 0; i < 100; i++) {
-        int x = i % VGAScreen->w;  // Ensure the pixel is within screen width
-        int y = i / VGAScreen->w;  // Move to next row if needed
-        if (y >= VGAScreen->h) break; // Ensure we don't exceed screen height
-
-        Uint32 *pixels = (Uint32 *)VGAScreen->pixels;
-        pixels[(y * VGAScreen->pitch / 4) + x] = red;
-    }
+         SDL_FillRect(VGAScreen, NULL, red);
 
         JE_showVGA();
+        SDL_Delay(1000);
     }
 
 	return 0;

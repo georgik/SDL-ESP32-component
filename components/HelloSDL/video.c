@@ -52,7 +52,9 @@ void init_video( void )
 	game_screen = SDL_CreateRGBSurface(SDL_SWSURFACE, vga_width, vga_height, 8, 0, 0, 0, 0);
 printf("BPP: %d\n", VGAScreen->format->BitsPerPixel);
 	spi_lcd_clear();
-	SDL_FillRect(VGAScreen, NULL, 0);
+
+	Uint32 green_color = SDL_MapRGB(VGAScreen->format, 0, 255, 0);
+	SDL_FillRect(VGAScreen, NULL, green_color);
 //heap_caps_check_integrity_all(true);	
 /*
 	if (!init_scaler(scaler, fullscreen_enabled) &&  // try desired scaler and desired fullscreen state
