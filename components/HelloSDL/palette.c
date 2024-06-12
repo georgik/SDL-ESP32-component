@@ -49,6 +49,7 @@ void JE_loadPals( void )
 	//palettes = (Palette *)malloc(sizeof(Palette) * PALETTE_COUNT);
 	for (int p = 0; p < palette_count; ++p)
 	{
+        printf("Palette %d\n", p);
 		for (int i = 0; i < 256; ++i)
 		{
 			// The VGA hardware palette used only 6 bits per component, so the values need to be rescaled to
@@ -73,10 +74,12 @@ void set_palette( Palette colors, unsigned int first_color, unsigned int last_co
 {
 	SDL_Surface *const surface = SDL_GetVideoSurface();
 	const uint bpp = surface->format->BitsPerPixel;
+    printf("BPP set_palette: %d\n", bpp);
 	
 	for (uint i = first_color; i <= last_color; ++i)
 	{
 		palette[i] = colors[i];
+        printf("Setting palette color %d: %d %d %d\n", i, palette[i].r, palette[i].g, palette[i].b);
 		
 		if (bpp != 8)
 		{
@@ -93,6 +96,7 @@ void set_colors( SDL_Color color, unsigned int first_color, unsigned int last_co
 {
 	SDL_Surface *const surface = SDL_GetVideoSurface();
 	const uint bpp = surface->format->BitsPerPixel;
+    printf("BPP set_colors: %d\n", bpp);
 	
 	for (uint i = first_color; i <= last_color; ++i)
 	{

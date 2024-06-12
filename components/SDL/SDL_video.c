@@ -145,6 +145,7 @@ Uint32 SDL_MapRGB(SDL_PixelFormat *fmt, Uint8 r, Uint8 g, Uint8 b)
 
 int SDL_SetColors(SDL_Surface *surface, SDL_Color *colors, int firstcolor, int ncolors)
 {
+    printf("Setting colors %d %d\n", firstcolor, ncolors);
 	for(int i = firstcolor; i < firstcolor+ncolors; i++)
 	{
 		int v=((colors[i].r>>3)<<11)+((colors[i].g>>2)<<5)+(colors[i].b>>3);

@@ -320,6 +320,12 @@ void IRAM_ATTR displayTask(void *arg) {
     //     return;
     // }
     printf("Entering display loop.\n");
+
+    // Log the first 10 items from lcdpal
+    for (int i = 0; i < 10; i++) {
+        printf("lcdpal[%d] = %d\n", i, lcdpal[i]);
+    }
+
 	while(1) {
 		xSemaphoreTake(dispSem, portMAX_DELAY);
 

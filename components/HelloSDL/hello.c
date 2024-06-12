@@ -21,13 +21,16 @@ int main( int argc, char *argv[] )
 		printf("Failed to initialize SDL: %s\n", SDL_GetError());
 		return -1;
 	}
+    
 	init_video();
     printf("Entering main app loop\n");
 
     for (; ; )
     {
-         Uint32 red = SDL_MapRGB(VGAScreen->format, 255, 0, 0);
-         SDL_FillRect(VGAScreen, NULL, red);
+        printf("Drawing red screen\n");
+        SDL_FillRect(VGAScreen, NULL, 0x02);
+        //  Uint32 red = SDL_MapRGB(VGAScreen->format, 255, 0, 0);
+        //  SDL_FillRect(VGAScreen, NULL, red);
 
         JE_showVGA();
         SDL_Delay(1000);
