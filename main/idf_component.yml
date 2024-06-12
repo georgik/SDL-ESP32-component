@@ -2,6 +2,7 @@
 dependencies:
   joltwallet/littlefs: "==1.14.4"
   espressif/esp-box: "^3.1.0"
+  espressif/esp_lcd_touch_tt21100: "*"
   #espressif/m5stack_core_s3_noglib: "*"
   ## Required IDF version
   idf:
