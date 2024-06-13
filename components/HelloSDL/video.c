@@ -55,7 +55,7 @@ void init_video( void )
     JE_loadPals();
 
     
-    memcpy(colors, palettes[1], sizeof(colors));
+    memcpy(colors, palettes[0], sizeof(colors));
     set_palette(colors, 0, 255);
 
     printf("BPP: %d\n", VGAScreen->format->BitsPerPixel);

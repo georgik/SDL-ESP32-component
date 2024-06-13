@@ -3,6 +3,7 @@
 
 #include "SDL.h"
 
+#include "pcxload.h"
 #include "video.h"
 
 #include <assert.h>
@@ -44,9 +45,14 @@ int main( int argc, char *argv[] )
 	}
     
 	init_video();
+
+    printf("Display initial screen\n");
+    JE_loadPCX("tshp2.pcx");
+    JE_showVGA();
+
     printf("Entering main app loop\n");
 
-    SDL_FillRect(VGAScreen, NULL, 0x02);
+    // SDL_FillRect(VGAScreen, NULL, 0x02);
     for (; ; )
     {
         printf("Drawing red screen\n");

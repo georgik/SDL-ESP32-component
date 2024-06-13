@@ -3,6 +3,7 @@ idf_component_register(
         "hello.c"
         # "keyboard.c"
         "palette.c"
+        "pcxload.c"
         "video.c"
         "video_scale.c"
     INCLUDE_DIRS "."
