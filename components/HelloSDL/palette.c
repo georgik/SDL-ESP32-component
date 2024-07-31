@@ -29,7 +29,7 @@ static Uint32 rgb_to_yuv( int r, int g, int b );
 #ifdef TYRIAN2000
 #define PALETTE_COUNT 24
 #else
-#define PALETTE_COUNT 23
+#define PALETTE_COUNT 1
 #endif
 
 EXT_RAM_BSS_ATTR Palette palettes[PALETTE_COUNT];
@@ -79,8 +79,6 @@ void set_palette( Palette colors, unsigned int first_color, unsigned int last_co
 	for (uint i = first_color; i <= last_color; ++i)
 	{
 		palette[i] = colors[i];
-        printf("Setting palette color %d: %d %d %d\n", i, palette[i].r, palette[i].g, palette[i].b);
-		
 		if (bpp != 8)
 		{
 			rgb_palette[i] = SDL_MapRGB(surface->format, palette[i].r, palette[i].g, palette[i].b);

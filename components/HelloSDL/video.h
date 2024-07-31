@@ -24,7 +24,7 @@
 #include "SDL.h"
 
 #define vga_width 320
-#define vga_height 200
+#define vga_height 240
 
 extern bool fullscreen_enabled;
 

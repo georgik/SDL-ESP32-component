@@ -48,10 +48,11 @@ void Init_SD()
 // finds the Tyrian data directory
 const char *data_dir( void )
 {
-	return "/sd/tyrian/data";
+	return "/sd/espressif";
 	const char *dirs[] =
 	{
-		"/sd/tyrian/data",
+		"/sd/espressif",
+		"/sd/espressif/img",
 		custom_data_dir,
 		".",
 		"data",

@@ -35,7 +35,7 @@ char *SDL_VideoDriverName(char *namebuf, int maxlen)
 
 SDL_Rect **SDL_ListModes(SDL_PixelFormat *format, Uint32 flags)
 {
-    SDL_Rect mode[1] = {{0,0,320,200}};
+    SDL_Rect mode[1] = {{0,0,320,240}};
     return &mode;
 }
 

@@ -45,7 +45,7 @@ void JE_loadPCX(const char *file) // this is only meant to load tshp2.pcx
     
     efseek(f, 128, SEEK_SET);
     
-    for (int i = 0; i < 320 * 200; )
+    for (int i = 0; i < 320 * 240; )
     {
         Uint8 p = efgetc(f);
         if ((p & 0xc0) == 0xc0)

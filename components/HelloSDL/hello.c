@@ -47,7 +47,7 @@ int main( int argc, char *argv[] )
 	init_video();
 
     printf("Display initial screen\n");
-    JE_loadPCX("tshp2.pcx");
+    JE_loadPCX("espressif.pcx");
     JE_showVGA();
 
     printf("Entering main app loop\n");
