@@ -1,12 +1,9 @@
 ## IDF Component Manager Manifest File
 dependencies:
-  joltwallet/littlefs: "==1.14.8"
-  espressif/esp-box: "^3.1.0"
-  espressif/esp_lcd_touch_tt21100: "*"
-  esp_codec_dev:
-    public: true
-    version: "==1.1.0"
-  #espressif/m5stack_core_s3_noglib: "*"
+  sdl:
+    # path: ../../sdl
+    version: "0.0.2"
+    require: public
   ## Required IDF version
   idf:
     version: ">=5.0.0"

@@ -1,12 +1,10 @@
-version: "0.0.1"
-description: "Experimental implementation of SDL 1.x"
-url: "https://github.com/georgik/SDL-ESP32-component"
-license: "GNU Lesser General Public"
+description: Experimental implementation of SDL 1.x
+license: GNU Lesser General Public
+url: https://github.com/georgik/SDL-ESP32-component
+version: 0.0.2
 dependencies:
-  espressif/esp_lcd_touch: "^1.1.1"
-  #espressif/esp-box: "^3.0.5"
-  #espressif/esp_lcd_touch_tt21100: "*"
-  #espressif/esp_lcd_touch_ft5x06: "*"
-  ## Required IDF version
+  espressif/esp-box: "^3.1.0"
+  espressif/esp_lcd_touch:
+    version: ^1.1.1
   idf:
-    version: ">=4.1.0"
+    version: '>=5.0.0'

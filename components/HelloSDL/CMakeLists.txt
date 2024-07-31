@@ -7,5 +7,4 @@ idf_component_register(
         "video.c"
         "video_scale.c"
     INCLUDE_DIRS "."
-    REQUIRES "SDL"
 )
