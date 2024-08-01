@@ -2,7 +2,6 @@
 .vscode/c_cpp_properties.json
 .vscode/launch.json
 build/*
-data/*
 managed_components/
 sdkconfig
 .vscode/
